@@ -1,0 +1,37 @@
+
+
+<h2>Object List</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let obj of objects; let i = index" [class.even-row]="i % 2 === 0" [class.odd-row]="i % 2 !== 0">
+      <td>{{ obj.id }}</td>
+      <td>{{ obj.name || "NA"}}</td>
+      <td>{{ obj.data?.price ||"NA" }}</td>
+      <td>{{ obj.data?.color || "NA"}}</td>
+      <td><i class="bi bi-trash" (click)="del(i)" style="color: red;"></i></td>
+    </tr>
+  </tbody>
+</table>
+<div class="table-container">
+  <h2>Add New Object</h2>
+  <div class="add-object-container">
+ 
+   
+    <label for="name">Name:</label>
+    <input type="text" id="name" [(ngModel)]="newObject.name">
+    <label for="color">Color:</label>
+    <input type="text" id="color" [(ngModel)]="newObject.data.color">
+    <br>
+    <button (click)="addObject()" (click)="clearForm()">Submit</button>
+  
+
+   </div>
+</div>
