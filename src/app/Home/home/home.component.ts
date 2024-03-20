@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/Service/api.service';
 export class HomeComponent {
  myForm:any;
   objects: any[]=[];
-  count: number = 13;
+  count: number = 14;
   newObject: any = { id: '', name: '', data: { price: null, color: '' } };
   constructor(private apiService: ApiService) { }
 
@@ -29,12 +29,13 @@ export class HomeComponent {
   }
 
   addObject(): void {
-    this.newObject.id = this.count++;
+    this.newObject.id = this.generateUniqueId();
+    const newObj = { ...this.newObject };
 
-    this.apiService.addObject(this.newObject).subscribe(
+    this.apiService.addObject(newObj).subscribe(
       (response: any) => {
         console.log('Object added successfully:', response);
-        this.objects.push(this.newObject)
+        this.objects.push(newObj)
         //this.newObject = { id: '', name: '', data: { price: null, color: '' } };
       },
       (error) => {
